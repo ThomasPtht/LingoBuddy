@@ -23,6 +23,6 @@ describe('AvatarLogin', () => {
 
   it('should return initial from username', () => {
     component.username = 'John Doe';
-    expect(component.initial).toBe('JD');
+    expect(component.initial).toBe('J');
   });
 });

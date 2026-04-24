@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { VocabularyService } from '../../services/vocabulary.service';
 import { VocabularyStats } from '../../models/vocabulary.model';
-
 
 @Component({
   selector: 'app-collection',
@@ -15,8 +14,6 @@ import { VocabularyStats } from '../../models/vocabulary.model';
 export class Collection implements OnInit {
   private router = inject(Router);
   private vocabService = inject(VocabularyService);
-  private cdr = inject(ChangeDetectorRef);
-  private ngZone = inject(NgZone);
 
   stats: VocabularyStats | null = null;
 
@@ -27,23 +24,15 @@ export class Collection implements OnInit {
   loadStats() {
     this.vocabService.getStats().subscribe({
       next: (data) => {
-        this.ngZone.run(() => {
-          this.stats = data;
-          this.cdr.detectChanges();
-        });
+        this.stats = data;
       },
       error: (err) => {
-        this.ngZone.run(() => {
-          console.error('erreur stats:', err);
-          this.cdr.detectChanges();
-        });
-      }
+        console.error('erreur stats:', err);
+      },
     });
   }
 
   onFlashcards() {
     this.router.navigateByUrl('flashcards');
   }
-
-  
 }

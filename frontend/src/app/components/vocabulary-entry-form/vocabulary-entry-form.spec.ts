@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VocabularyEntryForm } from './vocabulary-entry-form';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('VocabularyEntryForm', () => {
   let component: VocabularyEntryForm;
@@ -8,7 +11,12 @@ describe('VocabularyEntryForm', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VocabularyEntryForm]
+      imports: [VocabularyEntryForm],
+      providers: [
+        provideAnimations(),
+        provideToastr(),
+        provideHttpClient(),
+      ],
     })
     .compileComponents();
 

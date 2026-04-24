@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Flashcard } from "../flashcard/flashcard";
+import { Flashcard } from "../../components/flashcard/flashcard";
 
 @Component({
   selector: 'app-flashcard-page',

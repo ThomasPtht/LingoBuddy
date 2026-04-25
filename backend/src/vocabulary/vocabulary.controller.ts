@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { VocabularyService } from './vocabulary.service';
 
-
 @Controller('vocabulary')
 export class VocabularyController {
   constructor(private readonly vocabularyService: VocabularyService) {}
@@ -18,11 +17,11 @@ export class VocabularyController {
 
   @Get()
   async getAll() {
-    return this.vocabularyService.getAll(); 
+    return this.vocabularyService.getAll();
   }
 
-@Delete(':id')
-async deleteById(@Param('id') id: string) {
-  return this.vocabularyService.deleteById(Number(id));
-}
+  @Delete(':id')
+  async deleteById(@Param('id') id: string) {
+    return this.vocabularyService.deleteById(Number(id));
+  }
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Patch, Req, UseGuards } from '@nestjs/common';
 import { StreakService } from './streak.service';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 
 @Controller('streak')

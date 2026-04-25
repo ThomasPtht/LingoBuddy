@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class VocabularyService {
@@ -24,13 +24,13 @@ export class VocabularyService {
         category: data.category,
         contextSentence: data.contextSentence,
         status: 'New',
-      }
+      },
     });
   }
 
   async getAll() {
     return this.prisma.vocabulary.findMany();
-  } 
+  }
 
   async deleteById(id: number) {
     return this.prisma.vocabulary.delete({ where: { id } });

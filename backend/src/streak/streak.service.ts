@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class StreakService {
@@ -33,14 +33,14 @@ export class StreakService {
     return this.prisma.user.update({
       where: { id: userId },
       data: { streakCount, lastReviewAt: new Date() },
-      select: { streakCount: true }
+      select: { streakCount: true },
     });
   }
 
   async getStreak(userId: number) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { streakCount: true, lastReviewAt: true }
+      select: { streakCount: true, lastReviewAt: true },
     });
     return user;
   }

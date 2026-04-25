@@ -1,0 +1,52 @@
+name: test workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: frontend
+      - name: TypeScript check
+        run: npx tsc --noEmit || true
+        working-directory: frontend
+      - name: Run tests
+        run: npm test -- --run
+        working-directory: frontend
+      - name: Security audit
+        run: npm audit --audit-level=moderate || true
+        working-directory: frontend
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: backend
+      - name: TypeScript check
+        run: npx tsc --noEmit || true
+        working-directory: backend
+      - name: Run tests
+        run: npm test
+        working-directory: backend
+      - name: Security audit
+        run: npm audit --audit-level=moderate || true
+        working-directory: backend

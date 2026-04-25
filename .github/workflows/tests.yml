@@ -23,7 +23,7 @@ jobs:
         run: npx tsc --noEmit || true
         working-directory: frontend
       - name: Run tests
-        run: npm test -- --run
+        run: npm test -- --watch=false
         working-directory: frontend
       - name: Security audit
         run: npm audit --audit-level=moderate || true
